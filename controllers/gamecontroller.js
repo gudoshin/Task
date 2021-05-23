@@ -1,4 +1,4 @@
-var router = require('express').Router();
+const router = require('express').Router();
 const Game = require('../models/game');
 
 router.get('/all', (req, res) => {
@@ -6,13 +6,13 @@ router.get('/all', (req, res) => {
         .then(
             function findSuccess(data) {
                 res.status(200).json({
-                    games: games,
+                    games: data,
                     message: "Data fetched."
                 })
             },
 
             function findFail() {
-                res.status(500).json({
+                res.status(404).json({
                     message: "Data not found"
                 })
             }
@@ -29,7 +29,7 @@ router.get('/:id', (req, res) => {
             },
 
             function findFail(err) {
-                res.status(500).json({
+                res.status(404).json({
                     message: "Data not found."
                 })
             }
